@@ -1,0 +1,8 @@
+### Deploy to GCP
+gcloud functions deploy tblExtractToGCS-function --entry-point com.manning.iot.dataload.TblExtractToGCSCloudFunction --runtime java11 --trigger-http --memory 512MB --allow-unauthenticated
+
+
+### Local testing
+Make sure all servie account is set
+1) mvn compile
+2) mvn function:run
