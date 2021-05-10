@@ -1,28 +1,13 @@
-package com.manning.iot.dataload;
-
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.bigquery.BigQuery;
-import com.google.cloud.bigquery.BigQueryException;
-import com.google.cloud.bigquery.BigQueryOptions;
-import com.google.cloud.bigquery.ExtractJobConfiguration;
-import com.google.cloud.bigquery.Job;
-import com.google.cloud.bigquery.JobInfo;
-import com.google.cloud.bigquery.TableId;
-
+import com.google.cloud.bigquery.*;
 import com.google.cloud.functions.HttpFunction;
 import com.google.cloud.functions.HttpRequest;
 import com.google.cloud.functions.HttpResponse;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Arrays;
-
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 // Sample to extract a compressed table
-public class TblExtractToGCSCloudFunction implements HttpFunction {
+public class LoadPTblfromGCScsv implements HttpFunction {
 
     @Override
     public void service(HttpRequest httpRequest, HttpResponse httpResponse) throws Exception {
@@ -59,10 +44,16 @@ public class TblExtractToGCSCloudFunction implements HttpFunction {
             BigQuery bigquery = BigQueryOptions.getDefaultInstance().getService();
 
             TableId tableId = TableId.of(projectName, datasetName, tableName);
-
+            /*
             ExtractJobConfiguration extractConfig =
                     ExtractJobConfiguration.newBuilder(tableId, destinationUri)
-                            //.setCompression(compressed)
+                            .setCompression(compressed)
+                            .setFormat(dataFormat)
+                            .build();
+
+             */
+            ExtractJobConfiguration extractConfig =
+                    ExtractJobConfiguration.newBuilder(tableId, destinationUri)
                             .setFormat(dataFormat)
                             .build();
 

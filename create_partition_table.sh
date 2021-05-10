@@ -12,7 +12,7 @@ bq mk --table \
   --schema timestamp:TIMESTAMP,tsunami_event_validity:INTEGER,tsunami_cause_code:INTEGER,earthquake_magnitude:FLOAT,latitude:FLOAT,longitude:FLOAT,maximum_water_height:FLOAT \
   --time_partitioning_field timestamp \
   --time_partitioning_type DAY \
-  manning-data-pipelines:tsunami.telemetry_data_p1
+  manning-data-pipelines:tsunami.telemetry_data_partitioned
 
 echo "tsunami partition table created..."
 echo ""
